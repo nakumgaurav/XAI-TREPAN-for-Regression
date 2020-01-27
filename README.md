@@ -7,3 +7,5 @@ To run:
 python3 xai.py --data_path $DATA_PATH --val_size $VAL_SIZE --test_size $TEST_SIZE --bs $BATCH_SIZE --lr $LEARNING_RATE --num_epochs $NUM_EPOCHS
 
 The other source files are decomposed into two parts: The decision tree code which implements the main TREPAN algorithm and the neural network code, which consists of training code for a 4 layer ANN with 100 units per layer.
+
+[1].https://papers.nips.cc/paper/1152-extracting-tree-structured-representations-of-trained-networks.pdf
