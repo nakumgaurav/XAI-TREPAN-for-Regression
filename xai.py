@@ -46,7 +46,17 @@ import numpy as np
 
 torch.manual_seed(0)
 
-dataset_file = 'combined.csv'
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("--data_path", required=True)
+parser.add_argument("--val_size", default=0.1)
+parser.add_argument("--test_size", default=0.1)
+parser.add_argument("--bs", default=512)
+parser.add_argument("--lr", default=0.0001)
+parser.add_argument("--num_epochs", default=100)
+
+# dataset_file = 'combined.csv'
+dataset_file = args.data_path
 
 with open(dataset_file) as csvfile:
     csvreader = csv.DictReader(csvfile)
@@ -74,8 +84,8 @@ with open(dataset_file) as csvfile:
 
     print("Complete dataset", len(dataset), dataset[0])
 
-dev_fraction = 0.1
-test_fraction = 0.1
+dev_fraction = args.val_size
+test_fraction = args.test_size
 train_fraction = 1 - dev_fraction - test_fraction
 
 training_data = []
@@ -133,9 +143,9 @@ print(linear_regressor)
 global_step = 1
 best_model_loss = np.inf
 
-training_batch_size = 512
-learning_rate = 0.0001
-num_epochs = 100
+training_batch_size = args.bs
+learning_rate = args.lr
+num_epochs = args.num_epochs
 save_period = 5
 
 optimizer = Adam(params=linear_regressor.parameters(), lr=learning_rate)
